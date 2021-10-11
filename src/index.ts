@@ -4,10 +4,12 @@ import fs from 'fs';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import path from 'path';
+import { connect } from 'mongoose';
 import initRoutes from './routes/initRoutes';
 
 (async () => {
     config();
+    await connect(process.env.MONGO_URI!);
 
     const app = express();
     const port = process.env.PORT || 8080;
