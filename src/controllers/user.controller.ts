@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
-import { registerUser } from '../services/auth.service';
-import { UserType } from '../types';
+import cookie from 'cookie';
+import { LoginUser, registerUser } from '../services/auth.service';
+import { LoginUserData, RegisterUserData } from '../types';
 
-export const handleRegisterUser = async (req: Request, res: Response) => {
+export const handleUserRegister = async (req: Request, res: Response) => {
     const {
         firstName,
         lastName,
@@ -14,7 +15,7 @@ export const handleRegisterUser = async (req: Request, res: Response) => {
 
     if (password !== confirmPassword) return res.status(400).json({ e: 'Passwords do not match' });
 
-    const userData: UserType = {
+    const userData: RegisterUserData = {
         firstName,
         lastName,
         email,
@@ -27,3 +28,30 @@ export const handleRegisterUser = async (req: Request, res: Response) => {
     if (response.e) return res.status(response.status).json({ e: response.e });
     return res.status(response.status).json({ data: response.data });
 };
+
+export const handleUserLogin = async (req: Request, res: Response) => {
+    const { username, password } = req.body;
+
+    const userData: LoginUserData = {
+        username,
+        password,
+    };
+
+    const response = await LoginUser(userData);
+
+    if (response.e) return res.status(response.status).json({ e: response.e });
+
+    if (response.data) {
+        res.set('Set-Cookie', cookie.serialize('token', response.data.token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 3600, // Expires after one hour
+            path: '/',
+        }));
+
+        return res.status(response.status).json({ data: response.data.existingUser });
+    }
+};
+
+export const handleMe = async (_: Request, res: Response) => res.json(res.locals.user);

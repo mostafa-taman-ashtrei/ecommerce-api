@@ -3,6 +3,7 @@ import { config } from 'dotenv';
 import fs from 'fs';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 import path from 'path';
 import { connect } from 'mongoose';
 import initRoutes from './routes/initRoutes';
@@ -15,6 +16,7 @@ import initRoutes from './routes/initRoutes';
     const port = process.env.PORT || 8080;
 
     app.use(helmet());
+    app.use(cookieParser());
     app.use(express.json());
     app.use(morgan('dev'));
 
