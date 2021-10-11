@@ -25,6 +25,7 @@
         ],
         "no-console": "off",
         "consistent-return": "off",
+        "object-curly-newline": "off",
         "indent": [
             "error",
             4

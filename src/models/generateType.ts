@@ -1,6 +1,7 @@
 const generateTypes = (
     type: StringConstructor | NumberConstructor,
     isUnique: boolean,
+    isRequired: boolean,
     setDefault: boolean,
     defaultValue: any,
     maxlength: number,
@@ -10,6 +11,7 @@ const generateTypes = (
         return {
             type,
             maxlength,
+            required: isRequired,
             minlength,
             unique: isUnique,
             default: defaultValue,
@@ -19,6 +21,7 @@ const generateTypes = (
     return {
         type,
         maxlength,
+        required: isRequired,
         unique: isUnique,
         minlength,
     };

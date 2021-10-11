@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import cookie from 'cookie';
+import { validationResult } from 'express-validator';
 import { LoginUser, registerUser } from '../services/auth.service';
 import { LoginUserData, RegisterUserData } from '../types';
 
@@ -12,6 +13,9 @@ export const handleUserRegister = async (req: Request, res: Response) => {
         password,
         confirmPassword,
     } = req.body;
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
 
     if (password !== confirmPassword) return res.status(400).json({ e: 'Passwords do not match' });
 
@@ -36,6 +40,9 @@ export const handleUserLogin = async (req: Request, res: Response) => {
         username,
         password,
     };
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
 
     const response = await LoginUser(userData);
 
