@@ -63,7 +63,7 @@ export const handleUserLogin = async (req: Request, res: Response) => {
 
 export const handleMe = async (_: Request, res: Response) => res.json(res.locals.user);
 
-export const handleLogout = (_: Request, res: Response) => {
+export const handleUserLogout = (_: Request, res: Response) => {
     res.set('Set-Cookie', cookie.serialize('token', '', {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',

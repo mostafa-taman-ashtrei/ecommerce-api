@@ -1,13 +1,23 @@
 const generateTypes = (
-    type: StringConstructor | NumberConstructor,
+    type: StringConstructor | NumberConstructor | BooleanConstructor | ArrayConstructor | DateConstructor,
     isUnique: boolean,
     isRequired: boolean,
+    setMinMax: boolean,
     setDefault: boolean,
     defaultValue: any,
     maxlength: number,
     minlength: number,
 ) => {
     if (setDefault) {
+        if (!setMinMax) {
+            return {
+                type,
+                required: isRequired,
+                unique: isUnique,
+                default: defaultValue,
+            };
+        }
+
         return {
             type,
             maxlength,
@@ -15,6 +25,14 @@ const generateTypes = (
             minlength,
             unique: isUnique,
             default: defaultValue,
+        };
+    }
+
+    if (!setMinMax) {
+        return {
+            type,
+            required: isRequired,
+            unique: isUnique,
         };
     }
 

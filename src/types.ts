@@ -18,3 +18,19 @@ export interface RegisterUserData {
     email: string;
     password: string;
 }
+
+export interface ProductType {
+    title: string;
+    description: string;
+    price: number;
+    quantity: number;
+    is_deleted: boolean;
+    deteted_at: Date;
+}
+
+export interface AddProductData {
+    title: string;
+    description: string;
+    price: number;
+    quantity: number;
+}
