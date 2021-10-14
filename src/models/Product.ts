@@ -19,7 +19,7 @@ const ProductSchema = new Schema({
     price: generateTypes(Number, false, true, false, true, 0.1, 0, 0),
     quantity: generateTypes(Number, false, true, false, true, 1, 0, 0),
     is_deleted: generateTypes(Boolean, false, false, false, true, false, 0, 0),
-    deteted_at: generateTypes(Date, false, false, false, false, false, 0, 0),
+    deteted_at: generateTypes(Date, false, false, false, true, null, 0, 0),
 }, { timestamps: true });
 
 const ProductModel: Model<ProductType> = model('products', ProductSchema);
