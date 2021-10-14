@@ -8,7 +8,7 @@ const isAdmin = async (_: Request, res: Response, next: NextFunction) => {
         return next();
     } catch (err) {
         console.log(err);
-        return res.status(401).json({ error: 'You are not an admin' });
+        return res.status(403).json({ error: 'You are not an admin' });
     }
 };
 

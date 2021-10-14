@@ -23,3 +23,17 @@ export const addProduct = async (product: AddProductData) => {
         return { status: 500, e: 'ServerError', data: null };
     }
 };
+
+export const getProductById = async (id: string) => {
+    try {
+        const product = await ProductModel.findById({ _id: id });
+        console.log(product);
+
+        if (product === null) return { status: 404, e: 'Product not found!', data: null };
+        if (product.errors) return { status: 424, e: product.errors, data: null };
+        return { status: 201, e: null, data: product };
+    } catch (e) {
+        console.log(e);
+        return { status: 500, e: 'ServerError', data: null };
+    }
+};
