@@ -25,7 +25,7 @@ export interface ProductType {
     price: number;
     quantity: number;
     is_deleted: boolean;
-    deteted_at: Date;
+    deteted_at: Date | null;
 }
 
 export interface AddProductData {

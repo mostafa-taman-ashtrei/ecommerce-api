@@ -1,5 +1,5 @@
 const generateTypes = (
-    type: StringConstructor | NumberConstructor | BooleanConstructor | ArrayConstructor | DateConstructor,
+    type: StringConstructor | NumberConstructor | BooleanConstructor | ArrayConstructor | DateConstructor | null,
     isUnique: boolean,
     isRequired: boolean,
     setMinMax: boolean,
