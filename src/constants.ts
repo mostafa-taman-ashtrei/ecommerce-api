@@ -1,2 +1,10 @@
 export const DELETE_ACTION = 'delete';
 export const RESTORE_ACTION = 'restore';
+export const SUCCESS_STATUS = 200;
+export const SERVER_ERROR_STATUS = 500;
+export const CREATED_STATUS = 201;
+export const FORBIDDEN_STATUS = 403;
+export const UNAUTHORIZED_STATUS = 401;
+export const NOT_FOUND_STATUS = 404;
+export const DB_ERROR_STATUS = 502;
+export const BAD_REQUEST_STATUS = 400;
