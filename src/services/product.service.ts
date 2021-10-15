@@ -38,40 +38,18 @@ export const getProductById = async (id: string) => {
     }
 };
 
-export const deleteProductById = async (id: string) => {
+export const deleteAndRestoreProductById = async (id: string, action: string) => {
     try {
-        const deletedProduct = await ProductModel.findByIdAndUpdate(
+        const updatedProduct = await ProductModel.findByIdAndUpdate(
             { _id: id },
             {
-                deteted_at: new Date(),
-                is_deleted: true,
+                deteted_at: action === 'delete' ? new Date() : null,
+                is_deleted: action === 'delete',
             },
         );
 
-        console.log(deletedProduct);
-
-        if (deletedProduct?.errors) return { status: 424, e: deletedProduct.errors, data: null };
-        return { status: 201, e: null, data: `Product ${id} has been deleted successfully` };
-    } catch (e) {
-        console.log(e);
-        return { status: 500, e: 'ServerError', data: null };
-    }
-};
-
-export const restoreProductById = async (id: string) => {
-    try {
-        const deletedProduct = await ProductModel.findByIdAndUpdate(
-            { _id: id },
-            {
-                deteted_at: null,
-                is_deleted: false,
-            },
-        );
-
-        console.log(deletedProduct);
-
-        if (deletedProduct?.errors) return { status: 424, e: deletedProduct.errors, data: null };
-        return { status: 201, e: null, data: `Product ${id} has been restored successfully` };
+        if (updatedProduct?.errors) return { status: 424, e: updatedProduct.errors, data: null };
+        return { status: 201, e: null, data: `Product ${id} has been ${action}ed successfully` };
     } catch (e) {
         console.log(e);
         return { status: 500, e: 'ServerError', data: null };
