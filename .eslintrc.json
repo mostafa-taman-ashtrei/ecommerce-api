@@ -23,7 +23,7 @@
             "error",
             "single"
         ],
-        "no-console": "off",
+        "no-console": "warn",
         "consistent-return": "off",
         "object-curly-newline": "off",
         "indent": [
