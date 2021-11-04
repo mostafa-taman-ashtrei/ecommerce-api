@@ -20,6 +20,7 @@ const UserSchema = new Schema({
     email: generateTypes(String, true, true, true, false, null, 30, 2),
     password: generateTypes(String, false, true, true, false, null, 100, 8),
     isAdmin: generateTypes(Boolean, false, true, false, true, false, 0, 0),
+    cart: generateTypes(Array, false, false, false, true, [], 0, 0),
 }, { timestamps: true });
 
 const UserModel: Model<UserType> = model('users', UserSchema);
